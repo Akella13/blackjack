@@ -1,5 +1,5 @@
 # blackjack
-
+Simple blackjack game
 ## Project setup
 ```
 npm install
