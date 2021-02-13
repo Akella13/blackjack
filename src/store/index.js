@@ -2,11 +2,11 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
+    cardsDealed: 0,
   },
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    dealCard(state) {
+      state.cardsDealed += 1;
+    },
   },
 });

@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     Ask() {
-      console.log('ask new card');
+      this.$store.commit('dealCard');
     },
   },
 };

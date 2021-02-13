@@ -16,8 +16,17 @@ export default {
       deck: initialDeck,
     };
   },
+  computed: {
+    cardsDealed() {
+      return this.$store.state.cardsDealed;
+    },
+  },
+  watch: {
+    cardsDealed: 'Deal',
+  },
   methods: {
     Deal() {
+      // TODO: 0 cards in deck edge case
       const card = this.deck.pop();
       console.log('dealing new card;', card);
     },
