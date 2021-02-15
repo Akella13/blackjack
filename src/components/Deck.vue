@@ -20,18 +20,31 @@ export default {
     cardsDealed() {
       return this.$store.state.cardsDealed;
     },
+    cardsInDeck() {
+      return this.deck.length;
+    },
   },
   watch: {
     cardsDealed: 'Deal',
+    cardsInDeck: 'CardsInDeckToStore',
+  },
+  mounted() {
+    this.CardsInDeckToStore();
   },
   methods: {
     Deal() {
-      // TODO: 0 cards in deck edge case
-      const card = this.deck.pop();
-      console.log('dealing new card;', card);
+      if (this.cardsInDeck > 0) {
+        const card = this.deck.pop();
+        console.log('dealing new card;', card);
+      } else {
+        console.error('No cards left');
+      }
     },
     Reset() {
       this.deck = initialDeck;
+    },
+    CardsInDeckToStore() {
+      this.$store.state.cardsInDeck = this.cardsInDeck;
     },
   },
 };
