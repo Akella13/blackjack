@@ -14,7 +14,12 @@ export default {
   },
   computed: {
     score() {
-      return this.hand.reduce((acc, val) => (acc += val), 0);
+      return this.cards.reduce((acc, val) => (acc + val), 0);
+    },
+  },
+  watch: {
+    score(score) {
+      this.$emit('score-update', score);
     },
   },
 };

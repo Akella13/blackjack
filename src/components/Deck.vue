@@ -40,7 +40,7 @@ export default {
       }
     },
     Reset() {
-      this.deck = initialDeck;
+      this.deck = helpers.shuffle(initialDeck);
     },
   },
 };

@@ -8,23 +8,30 @@
 
 <script>
 export default {
+  props: {
+    score: Number,
+  },
   data() {
     return {
-      score: 0,
+      endRound: false,
     };
   },
   watch: {
     score() {
       // loss of a round
       if (this.score > 21) {
-        console.log('loss of a round');
-        this.score = 0;
+        console.log('You lose!');
+        this.endRound = true;
       }
     },
   },
   methods: {
     Ask() {
-      this.$emit('request-card');
+      if (!this.endRound) {
+        this.$emit('request-card');
+      } else {
+        console.log('Bets are off');
+      }
     },
   },
 };
