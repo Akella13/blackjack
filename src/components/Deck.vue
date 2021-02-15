@@ -8,6 +8,9 @@
 </template>
 
 <script>
+// BUG: cannot use destructured import
+import helpers from '../helpers';
+
 const initialDeck = [3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 export default {
@@ -16,7 +19,7 @@ export default {
   },
   data() {
     return {
-      deck: initialDeck,
+      deck: helpers.shuffle(initialDeck),
     };
   },
   computed: {
