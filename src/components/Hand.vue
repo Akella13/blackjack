@@ -2,17 +2,15 @@
   <div>
     <h3>Hand</h3>
     <div class="hand">
-      {{ hand }}
+      {{ cards }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      hand: [],
-    };
+  props: {
+    cards: Array,
   },
   computed: {
     score() {

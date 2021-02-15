@@ -1,9 +1,9 @@
 <template>
   <div class="game">
     <h2 class="game__info">Round: {{ round }}</h2>
-    <deck />
-    <pitch />
-    <hand />
+    <deck :cards-requested="cardsRequested" @dealing="Dealing"/>
+    <pitch @request-card="RequestCard"/>
+    <hand :cards="hand"/>
   </div>
 </template>
 
@@ -21,7 +21,17 @@ export default {
   data() {
     return {
       round: 1,
+      hand: [],
+      cardsRequested: 0,
     };
+  },
+  methods: {
+    Dealing(card) {
+      this.hand.push(card);
+    },
+    RequestCard() {
+      this.cardsRequested += 1;
+    },
   },
 };
 </script>
