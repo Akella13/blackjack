@@ -1,10 +1,13 @@
 <template>
   <div>
-    <button @click="Ask">
+    <button :disabled="endRound" @click="Ask">
       Hit me
     </button>
-    <button @click="Done">
+    <button :disabled="endRound" @click="Done">
       Done
+    </button>
+    <button :disabled="!endRound" @click="NewRound">
+      New Round
     </button>
   </div>
 </template>
@@ -36,33 +39,7 @@ export default {
         const dealerScore = oppScores[Math.floor(Math.random() * oppScores.length)];
         console.log('Your score: ', this.score);
         console.log('Dealer score: ', dealerScore);
-        if (this.score === dealerScore) {
-          console.log('Draw');
-        } else if (this.score > 21) {
-          console.log('Overkill');
-          if (dealerScore > 21) {
-            // compare overkills
-            if (this.score > dealerScore) {
-              console.log('You lose');
-            } else {
-              console.log('You win');
-            }
-          } else {
-            console.log('You lose');
-          }
-        } else if (this.score < 21) {
-          console.log('Shortfall');
-          if (dealerScore <= 21) {
-            // compare scores
-            if (this.score < dealerScore) {
-              console.log('You lose');
-            } else {
-              console.log('You win');
-            }
-          }
-        } else {
-          console.log('Blackjack! You win');
-        }
+        this.CompareScores(this.score, dealerScore);
       }
     },
   },
@@ -76,6 +53,41 @@ export default {
     },
     Done() {
       this.endRound = true;
+    },
+    CompareScores(user, opp) {
+      if (user === opp) {
+        console.log('Draw');
+      } else if (user > 21) {
+        console.log('Overkill');
+        if (opp > 21) {
+          // compare overkills
+          if (user > opp) {
+            console.log('You lose');
+          } else {
+            console.log('You win');
+          }
+        } else {
+          console.log('You lose');
+        }
+      } else if (user < 21) {
+        console.log('Shortfall');
+        if (opp <= 21) {
+          // compare scores
+          if (user < opp) {
+            console.log('You lose');
+          } else {
+            console.log('You win');
+          }
+        } else {
+          console.log('You win');
+        }
+      } else {
+        console.log('Blackjack! You win');
+      }
+    },
+    NewRound() {
+      this.endRound = false;
+      this.$emit('new-round');
     },
   },
 };

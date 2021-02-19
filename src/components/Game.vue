@@ -2,7 +2,7 @@
   <div class="game">
     <h2 class="game__info">Round: {{ round }}</h2>
     <deck :cards-requested="cardsRequested" @dealing="Dealing"/>
-    <pitch :score="score" @request-card="RequestCard"/>
+    <pitch :score="score" @request-card="RequestCard" @new-round="NewRound"/>
     <hand :cards="hand" @score-update="ScoreUpdate"/>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
       hand: [],
       cardsRequested: 0,
       score: 0,
+      discard: [],
     };
   },
   methods: {
@@ -35,6 +36,11 @@ export default {
     },
     ScoreUpdate(payload) {
       this.score = payload;
+    },
+    NewRound() {
+      // this.discard = [...this.discard, ...this.hand];
+      this.discard.push(...this.hand);
+      this.hand = [];
     },
   },
 };
